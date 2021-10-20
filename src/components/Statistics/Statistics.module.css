@@ -15,10 +15,6 @@
     margin-right: auto;
 }
 
-.name {
-    text-transform: capitalize;
-}
-
 .item {
     margin-bottom: 10px;
     font-size: 20px;

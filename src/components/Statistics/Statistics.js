@@ -1,46 +1,39 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import shortid from 'shortid';
 import s from './Statistics.module.css';
 
-class Statistics extends Component {
-    static defaultProps = {
-        stateValue: { good: 0, neutral: 0, bad: 0 },
-        total: 0,
-    };
+export default function Statistics({
+    good,
+    neutral,
+    bad,
+    total,
+    totalPositive,
+}) {
+    return (
+        <div className={s.statistics}>
+            <h2 className={s.title}>Statistics</h2>
+            <ul className={s.list}>
+                <li className={s.item}>Good: {good}</li>
+                <li className={s.item}>Neutral: {neutral}</li>
+                <li className={s.item}>Bad: {bad}</li>
 
-    static propTypes = {
-        stateValue: PropTypes.object.isRequired,
-        total: PropTypes.number.isRequired,
-        totalPositive: PropTypes.number.isRequired,
-    };
+                <li className={s.item}>
+                    <span>Total: </span>
+                    <span>{total}</span>
+                </li>
 
-    render() {
-        const dataObj = Object.entries(this.props.stateValue);
-        return (
-            <div className={s.statistics}>
-                <h2 className={s.title}>Statistics</h2>
-                <ul className={s.list}>
-                    {dataObj.map(([key, value]) => (
-                        <li key={shortid.generate()} className={s.item}>
-                            <span className={s.name}>{key + ' '}</span>
-                            <span>{value}</span>
-                        </li>
-                    ))}
-
-                    <li className={s.item}>
-                        <span>Total: </span>
-                        <span>{this.props.total}</span>
-                    </li>
-
-                    <li className={s.item}>
-                        <span>Positive feedback: </span>
-                        <span>{this.props.totalPositive}%</span>
-                    </li>
-                </ul>
-            </div>
-        );
-    }
+                <li className={s.item}>
+                    <span>Positive feedback: </span>
+                    <span>{totalPositive}%</span>
+                </li>
+            </ul>
+        </div>
+    );
 }
 
-export default Statistics;
+Statistics.propTypes = {
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    totalPositive: PropTypes.number.isRequired,
+};
